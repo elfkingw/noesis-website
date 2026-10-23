@@ -58,7 +58,7 @@ npm run dev
 
 ### Vercel（推荐，零配置）
 
-仓库含 `vercel.json`（`framework: nextjs`，`npm ci` + `npm run build`）。在 Vercel 导入本仓库即可；Root Directory 保持仓库根目录。
+仓库含 `vercel.json`（`framework: nextjs`，`npm ci` + `npm run build`）。在 Vercel 导入本仓库即可；Root Directory 保持仓库根目录。**不要**在 Vercel 设置 `GITHUB_PAGES` / `NEXT_PUBLIC_STATIC_EXPORT`（那是 Pages 静态导出专用）。
 
 在 Vercel Project → Settings → Environment Variables 配置：
 
@@ -69,6 +69,23 @@ npm run dev
 | `CONTACT_WEBHOOK_TOKEN` | 可选 | `Authorization: Bearer …` |
 
 本地对应文件：`.env.example` → `.env.local`。
+
+### GitHub Pages 预览（免费公网）
+
+生产分支推送后，workflow `pages-preview.yml` 会静态导出并发布到 **`gh-pages`** 分支（`basePath=/noesis-website`）。
+
+预期地址：https://elfkingw.github.io/noesis-website/
+
+本地预览导出：
+
+```bash
+npm run build:pages
+npx serve out   # 注意：本地无 basePath，仅检查产物；真机请用 github.io
+```
+
+预约表单在 Pages 上为预览模式（无 `/api/contact`），页面仍可浏览。
+
+**若站点 404：** 在 GitHub → Settings → Pages → Build and deployment → Source 选 **Deploy from a branch** → Branch **`gh-pages`** / **/ (root)** → Save。
 
 ### 其他 Node 宿主
 

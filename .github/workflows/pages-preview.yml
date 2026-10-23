@@ -1,0 +1,41 @@
+name: GitHub Pages preview
+
+on:
+  push:
+    branches: [cursor/noesis-production-site-8112]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: pages-preview
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: ".nvmrc"
+          cache: npm
+
+      - run: npm ci
+
+      - name: Static export for GitHub Pages
+        run: npm run build:pages
+        env:
+          NEXT_PUBLIC_SITE_URL: https://elfkingw.github.io/noesis-website
+
+      - name: Publish to gh-pages branch
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./out
+          publish_branch: gh-pages
+          force_orphan: true
+          enable_jekyll: false
+          commit_message: "Deploy Pages preview from ${{ github.sha }}"
