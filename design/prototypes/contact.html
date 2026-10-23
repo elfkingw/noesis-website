@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>预约演示 — 新致新知 Noesis AI</title>
+    <meta
+      name="description"
+      content="预约新致新知 Noesis AI 产品演示或方案沟通：面向企业与银行决策团队。"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Noto+Sans+SC:wght@400;500;600&family=Noto+Serif+SC:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="nav-inner">
+        <a class="brand" href="index.html">
+          <span class="brand-zh">新致新知</span>
+          <span class="brand-en">Noesis AI</span>
+        </a>
+        <button class="nav-toggle" type="button" aria-label="打开菜单" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+        <ul class="nav-links">
+          <li><a href="platform.html">产品平台</a></li>
+          <li><a href="solutions.html">解决方案</a></li>
+          <li><a href="cases.html">客户案例</a></li>
+          <li><a class="nav-cta" href="contact.html" aria-current="page">预约演示</a></li>
+        </ul>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero hero-page">
+        <div class="hero-bg" aria-hidden="true"></div>
+        <div class="hero-inner">
+          <p class="hero-brand reveal">
+            <span class="zh">新致新知</span>
+            <span class="en">Noesis AI</span>
+          </p>
+          <h1 class="reveal reveal-delay-1">预约演示或方案沟通</h1>
+          <p class="hero-lead reveal reveal-delay-2">
+            面向企业与银行决策团队。请留下基本信息与关注场景，我们将安排对应议程（平台评估 / 信贷营销 / 智能运维 / FDE）。
+          </p>
+        </div>
+      </section>
+
+      <section class="section section-paper">
+        <div class="wrap contact-grid">
+          <form class="form" action="#" method="post" onsubmit="return false;">
+            <div class="field">
+              <label for="name">姓名</label>
+              <input id="name" name="name" type="text" autocomplete="name" required placeholder="您的称呼" />
+            </div>
+            <div class="field">
+              <label for="company">公司 / 机构</label>
+              <input id="company" name="company" type="text" autocomplete="organization" required placeholder="单位全称" />
+            </div>
+            <div class="field">
+              <label for="role">角色</label>
+              <input id="role" name="role" type="text" placeholder="如：科技部 / 业务负责人 / 架构师" />
+            </div>
+            <div class="field">
+              <label for="interest">感兴趣的方向</label>
+              <select id="interest" name="interest">
+                <option value="platform">产品平台与治理</option>
+                <option value="credit">银行信贷 AI 营销</option>
+                <option value="ops">智能运维决策系统</option>
+                <option value="fde">企业 AI 转型（FDE）</option>
+                <option value="other">其他 / 尚不确定</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="phone">手机</label>
+              <input id="phone" name="phone" type="tel" autocomplete="tel" required placeholder="便于顾问回电" />
+            </div>
+            <div class="field">
+              <label for="email">邮箱（选填）</label>
+              <input id="email" name="email" type="email" autocomplete="email" placeholder="name@company.com" />
+            </div>
+            <div class="field">
+              <label for="note">补充说明（选填）</label>
+              <textarea id="note" name="note" placeholder="现有系统、期望时间窗口、参会角色等"></textarea>
+            </div>
+            <p class="form-note">本页为设计原型，提交不会发送数据。正式站点将说明信息用途与隐私政策。</p>
+            <button class="btn btn-primary" type="submit">提交预约（原型）</button>
+          </form>
+
+          <aside>
+            <div class="aside-panel">
+              <h3>您会得到什么</h3>
+              <ul>
+                <li>按场景定制的演示议程</li>
+                <li>平台能力与治理要点对照</li>
+                <li>可选的试点/FDE 路径讨论</li>
+              </ul>
+            </div>
+            <div class="aside-panel" style="margin-top: 2rem">
+              <h3>出品方</h3>
+              <p>
+                <strong style="color: var(--text-on-mist)">上海新致软件股份有限公司</strong><br />
+                科技赋能·智慧金融
+              </p>
+              <p>产品品牌：新致新知 Noesis AI</p>
+            </div>
+          </aside>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <div class="zh">新致新知</div>
+          <div class="en">Noesis AI</div>
+        </div>
+        <p style="margin: 0">上海新致软件股份有限公司 · 科技赋能·智慧金融</p>
+        <div class="footer-meta">
+          <a href="index.html">首页</a>
+          <a href="platform.html">产品平台</a>
+          <a href="solutions.html">解决方案</a>
+          <a href="cases.html">客户案例</a>
+        </div>
+      </div>
+    </footer>
+    <script src="site.js"></script>
+  </body>
+</html>
