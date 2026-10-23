@@ -4,6 +4,14 @@
 
 技术栈：Next.js（App Router）+ TypeScript + CSS design tokens。文案与布局分离，预约表单走可插拔 Webhook。
 
+## 环境要求
+
+- **Node.js 22+**（与 CI / `.nvmrc` / `package.json#engines` 一致；jsdom 与 Testing Library 需要 Node 22）
+
+```bash
+nvm use   # 或安装 Node 22
+```
+
 ## 本地开发
 
 ```bash
@@ -48,20 +56,27 @@ npm run dev
 
 ## 部署
 
-推荐 [Vercel](https://vercel.com)：导入本仓库，Framework 选 Next.js，配置环境变量后部署。
+### Vercel（推荐，零配置）
 
-也可用任意 Node 宿主：
+仓库含 `vercel.json`（`framework: nextjs`，`npm ci` + `npm run build`）。在 Vercel 导入本仓库即可；Root Directory 保持仓库根目录。
+
+在 Vercel Project → Settings → Environment Variables 配置：
+
+| 变量 | 必需 | 说明 |
+|------|------|------|
+| `NEXT_PUBLIC_SITE_URL` | 建议 | 正式站点 origin，用于 canonical / Open Graph（如 `https://www.example.com`） |
+| `CONTACT_WEBHOOK_URL` | 生产建议 | 预约表单线索 POST 目标 |
+| `CONTACT_WEBHOOK_TOKEN` | 可选 | `Authorization: Bearer …` |
+
+本地对应文件：`.env.example` → `.env.local`。
+
+### 其他 Node 宿主
 
 ```bash
 npm ci
 npm run build
 npm start
 ```
-
-请设置：
-
-- `NEXT_PUBLIC_SITE_URL` — 正式域名（规范链接 / OG）
-- `CONTACT_WEBHOOK_URL` / `CONTACT_WEBHOOK_TOKEN` — 线索通道
 
 ### 上线前还需产品侧确认
 
@@ -72,7 +87,7 @@ npm start
 
 ## CI
 
-GitHub Actions（`.github/workflows/ci.yml`）在 PR / push 时运行 typecheck、lint、format、test、build。
+GitHub Actions（`.github/workflows/ci.yml`）使用 **Node 22**（读取 `.nvmrc`），在 PR / push 时运行 `npm ci`、typecheck、lint、format、test、build。
 
 ## 品牌
 
