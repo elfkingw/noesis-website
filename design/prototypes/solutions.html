@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Noto+Sans+SC:wght@400;500;600&family=Noto+Serif+SC:wght@600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Noto+Sans+SC:wght@400;500;600&family=Noto+Serif+SC:wght@600;700&family=Sora:wght@400;500;600&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles.css" />
@@ -36,100 +36,123 @@
     </header>
 
     <main>
-      <section class="hero hero-page">
+      <section class="hero hero-page hero-simple">
         <div class="hero-bg" aria-hidden="true"></div>
         <div class="hero-inner">
-          <p class="hero-brand reveal">
-            <span class="zh">新致新知</span>
-            <span class="en">Noesis AI</span>
-          </p>
-          <h1 class="reveal reveal-delay-1">面向金融与企业的三条落地路径</h1>
-          <p class="hero-lead reveal reveal-delay-2">
-            从可验证的业务场景切入：营销增长、运维决策、组织转型。每条路径都可映射到平台能力与客户案例。
-          </p>
-          <div class="hero-actions reveal reveal-delay-3">
-            <a class="btn btn-primary" href="contact.html">按场景预约沟通</a>
-            <a class="btn btn-ghost" href="cases.html">对照客户案例</a>
+          <div class="hero-copy">
+            <p class="hero-brand reveal">
+              <span class="zh">新致新知</span>
+              <span class="en">Noesis AI</span>
+            </p>
+            <h1 class="reveal reveal-delay-1">面向金融与企业的三条落地路径</h1>
+            <p class="hero-lead reveal reveal-delay-2">
+              营销增长、运维决策、组织转型——每条路径都映射到平台能力与真实客户案例。
+            </p>
+            <div class="hero-actions reveal reveal-delay-3">
+              <a class="btn btn-accent" href="contact.html">按场景预约沟通</a>
+              <a class="btn btn-ghost" href="cases.html">对照客户案例</a>
+            </div>
           </div>
         </div>
       </section>
 
-      <section class="section section-mist" id="credit">
+      <section class="section section-light" id="credit">
         <div class="wrap">
           <p class="eyebrow">方案 01</p>
-          <h2 class="section-title">银行信贷 AI 营销</h2>
-          <p class="section-desc">
-            用智能体连接客户洞察、产品策略与触达动作，提升信贷相关营销的精准度与人效。建行天津分行为首批试点行；典型场景包括家装分期业务中的商户智能推荐。
+          <h2 class="section-title reveal-on-scroll">银行信贷 AI 营销</h2>
+          <p class="section-desc reveal-on-scroll">
+            用智能体连接客户洞察、产品策略与触达动作。建行天津分行为首批试点行；典型场景包括家装分期业务中的商户智能推荐。
           </p>
-          <div class="cap-grid">
-            <article class="cap-item">
+          <div class="bento reveal-on-scroll">
+            <article class="bento-card">
+              <div class="bento-icon">场</div>
               <h3>场景切入</h3>
               <p>围绕分期与商户网络，把推荐与话术变成可治理的智能员工能力。</p>
             </article>
-            <article class="cap-item">
+            <article class="bento-card">
+              <div class="bento-icon">平</div>
               <h3>平台支撑</h3>
-              <p>RAG 承载产品与政策知识；Skills 固化营销动作；审核与审计保障合规动作。</p>
+              <p>RAG 承载产品与政策知识；Skills 固化营销动作；审核与审计保障合规。</p>
             </article>
-            <article class="cap-item">
+            <article class="bento-card">
+              <div class="bento-icon">值</div>
               <h3>价值指向</h3>
               <p>缩短从线索到合适产品匹配的路径，提升一线可用的智能辅助质量。</p>
             </article>
           </div>
           <p style="margin-top: 1.75rem">
-            <a class="btn btn-outline-dark" href="cases.html#ccb">查看建行天津分行案例 →</a>
+            <a class="btn btn-outline-light" href="cases.html#ccb">查看建行天津分行案例 →</a>
           </p>
         </div>
       </section>
 
-      <section class="section section-paper" id="ops">
-        <div class="wrap">
-          <p class="eyebrow">方案 02</p>
-          <h2 class="section-title">智能运维决策系统</h2>
-          <p class="section-desc">
-            面向银行与大型企业运维：在告警洪峰中收敛信号，辅助根因与影响分析，并衔接处置与运维问答。已在东亚银行落地。
-          </p>
-          <div class="feature-stack">
-            <div class="feature-row">
-              <h3>告警收敛</h3>
-              <p>降低噪声，突出真正需要人决策的事件簇。</p>
+      <section class="section section-void" id="ops">
+        <div class="wrap split-showcase">
+          <div class="reveal-on-scroll">
+            <p class="eyebrow">方案 02</p>
+            <h2 class="section-title">智能运维决策系统</h2>
+            <p class="section-desc">
+              面向银行与大型企业运维：在告警洪峰中收敛信号，辅助根因与影响分析，并衔接处置与运维问答。已在东亚银行落地。
+            </p>
+            <div class="feature-stack">
+              <div class="feature-row">
+                <h3>告警收敛</h3>
+                <p>降低噪声，突出真正需要人决策的事件簇。</p>
+              </div>
+              <div class="feature-row">
+                <h3>根因分析</h3>
+                <p>结合知识与连接器上下文，辅助定位问题源头。</p>
+              </div>
+              <div class="feature-row">
+                <h3>影响 · 处置 · 问答</h3>
+                <p>评估波及范围，衔处置建议与可检索的运维经验。</p>
+              </div>
             </div>
-            <div class="feature-row">
-              <h3>根因分析（RCA）</h3>
-              <p>结合知识与连接器上下文，辅助定位问题源头。</p>
-            </div>
-            <div class="feature-row">
-              <h3>影响分析</h3>
-              <p>评估波及范围，支持更稳妥的处置优先级。</p>
-            </div>
-            <div class="feature-row">
-              <h3>处置与运维问答</h3>
-              <p>将经验沉淀为可调用能力，值班与专家知识可即时检索。</p>
+            <p style="margin-top: 1.5rem">
+              <a class="btn btn-ghost" href="cases.html#bea">查看东亚银行案例 →</a>
+            </p>
+          </div>
+          <div class="product-frame ops-frame reveal-on-scroll" aria-hidden="true" style="transform: none">
+            <div class="product-frame-inner">
+              <div class="pf-chrome">
+                <span class="pf-dot"></span><span class="pf-dot"></span><span class="pf-dot"></span>
+                <span class="pf-title">RCA · Impact · Remediation</span>
+              </div>
+              <div class="pf-main" style="min-height: 240px">
+                <div class="ops-alert">告警簇已收敛 · 等待决策</div>
+                <div class="ops-steps">
+                  <div class="ops-step"><i></i><span>RCA 假设已生成</span><em>Agent</em></div>
+                  <div class="ops-step"><i></i><span>影响分析完成</span><em>图谱</em></div>
+                  <div class="ops-step"><i></i><span>处置建议送审</span><em>审核</em></div>
+                  <div class="ops-step"><i></i><span>相关 Runbook 已挂载</span><em>RAG</em></div>
+                </div>
+              </div>
             </div>
           </div>
-          <p style="margin-top: 1.75rem">
-            <a class="btn btn-outline-dark" href="cases.html#bea">查看东亚银行案例 →</a>
-          </p>
         </div>
       </section>
 
-      <section class="section section-mist" id="fde">
+      <section class="section section-light" id="fde">
         <div class="wrap">
           <p class="eyebrow">方案 03</p>
-          <h2 class="section-title">企业 AI 转型服务（FDE）</h2>
-          <p class="section-desc">
+          <h2 class="section-title reveal-on-scroll">企业 AI 转型服务（FDE）</h2>
+          <p class="section-desc reveal-on-scroll">
             以前线部署工程师（Forward-Deployed Engineer）方式深入客户现场：共同定义场景、接入系统、打磨 Skills
             与治理策略，避免「只交付许可证、不交付结果」。
           </p>
-          <div class="cap-grid">
-            <article class="cap-item">
+          <div class="bento reveal-on-scroll">
+            <article class="bento-card">
+              <div class="bento-icon">01</div>
               <h3>共创试点</h3>
               <p>选定高价值、边界清晰的首个场景，快速形成可演示闭环。</p>
             </article>
-            <article class="cap-item">
+            <article class="bento-card">
+              <div class="bento-icon">02</div>
               <h3>工程落地</h3>
               <p>对接 MCP/CLI/API、知识库与权限模型，进入生产可用状态。</p>
             </article>
-            <article class="cap-item">
+            <article class="bento-card">
+              <div class="bento-icon">03</div>
               <h3>规模复制</h3>
               <p>将试点 Skills 与治理模板扩展到更多条线与租户。</p>
             </article>
@@ -137,11 +160,11 @@
         </div>
       </section>
 
-      <section class="section section-ink-soft">
+      <section class="section section-surface">
         <div class="wrap">
           <p class="eyebrow">如何选择</p>
-          <h2 class="section-title">一张对照表</h2>
-          <div class="feature-stack" style="margin-top: 2rem">
+          <h2 class="section-title reveal-on-scroll">对号入座</h2>
+          <div class="feature-stack reveal-on-scroll" style="margin-top: 2rem">
             <div class="feature-row">
               <h3>要增长与营销效能</h3>
               <p>从「银行信贷 AI 营销」开始，对照建行天津分行试点路径。</p>
@@ -158,12 +181,12 @@
         </div>
       </section>
 
-      <section class="section-ink cta-band">
+      <section class="section-void cta-band">
         <div class="wrap">
           <h2 class="section-title">告诉我们可以从哪条路径谈起</h2>
           <p class="section-desc">预约时选择感兴趣的方案，我们将准备对应议程。</p>
           <div class="cta-actions">
-            <a class="btn btn-primary" href="contact.html">预约演示</a>
+            <a class="btn btn-accent" href="contact.html">预约演示</a>
           </div>
         </div>
       </section>

@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Noto+Sans+SC:wght@400;500;600&family=Noto+Serif+SC:wght@600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Noto+Sans+SC:wght@400;500;600&family=Noto+Serif+SC:wght@600;700&family=Sora:wght@400;500;600&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles.css" />
@@ -36,55 +36,77 @@
     </header>
 
     <main>
-      <section class="hero hero-page">
+      <section class="hero hero-page hero-simple">
         <div class="hero-bg" aria-hidden="true"></div>
         <div class="hero-inner">
-          <p class="hero-brand reveal">
-            <span class="zh">新致新知</span>
-            <span class="en">Noesis AI</span>
-          </p>
-          <h1 class="reveal reveal-delay-1">企业级智能体平台</h1>
-          <p class="hero-lead reveal reveal-delay-2">
-            以 Skills 为核心构建可治理的智能员工，覆盖知识、连接、自动化、权限与安全运行时——面向对公与银行 IT 的交付标准。
-          </p>
-          <div class="hero-actions reveal reveal-delay-3">
-            <a class="btn btn-primary" href="contact.html">预约产品演示</a>
-            <a class="btn btn-ghost" href="solutions.html">查看解决方案</a>
+          <div class="hero-copy">
+            <p class="hero-brand reveal">
+              <span class="zh">新致新知</span>
+              <span class="en">Noesis AI</span>
+            </p>
+            <h1 class="reveal reveal-delay-1">企业级智能体平台</h1>
+            <p class="hero-lead reveal reveal-delay-2">
+              以 Skills 为核心构建可治理的智能员工运行时——覆盖知识、连接、自动化、权限与安全，面向对公与银行 IT 的交付标准。
+            </p>
+            <div class="hero-actions reveal reveal-delay-3">
+              <a class="btn btn-accent" href="contact.html">预约产品演示</a>
+              <a class="btn btn-ghost" href="solutions.html">查看解决方案</a>
+            </div>
           </div>
         </div>
       </section>
 
-      <section class="section section-mist">
+      <section class="section section-surface">
+        <div class="wrap split-showcase">
+          <div class="reveal-on-scroll">
+            <p class="eyebrow">控制台</p>
+            <h2 class="section-title">智能员工与 Skill 市场</h2>
+            <p class="section-desc" style="margin-bottom: 0">
+              产品表面即信任：访客应一眼看到「员工在调用哪些 Skills、是否待审、是否在沙箱」。
+            </p>
+          </div>
+          <div class="product-frame reveal-on-scroll" aria-hidden="true" style="transform: none">
+            <div class="product-frame-inner">
+              <div class="pf-chrome">
+                <span class="pf-dot"></span><span class="pf-dot"></span><span class="pf-dot"></span>
+                <span class="pf-title">Skill Marketplace</span>
+              </div>
+              <div class="pf-main" style="display: grid; gap: 0.55rem; min-height: 200px">
+                <div class="ops-step"><i></i><span>商户推荐 · 信贷营销</span><em>已发布</em></div>
+                <div class="ops-step"><i></i><span>告警收敛 · 运维</span><em>已发布</em></div>
+                <div class="ops-step"><i></i><span>政策问答 · RAG</span><em>审核中</em></div>
+                <div class="ops-step"><i></i><span>WPS 文档摘要</span><em>沙箱</em></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-light">
         <div class="wrap">
-          <p class="eyebrow">平台能力</p>
-          <h2 class="section-title">能力地图</h2>
-          <p class="section-desc">以下按决策与实施团队最常追问的主题组织，便于对照现有架构评估。</p>
-          <div class="feature-stack">
+          <p class="eyebrow">能力地图</p>
+          <h2 class="section-title reveal-on-scroll">平台能力一览</h2>
+          <p class="section-desc reveal-on-scroll">按决策与实施团队最常追问的主题组织。</p>
+          <div class="feature-stack reveal-on-scroll">
             <div class="feature-row">
               <h3>Skills 驱动智能员工</h3>
-              <p>
-                将业务能力沉淀为 Skills，由智能员工组合调用。避免脆弱、难维护的手搭工作流，使行为可复用、可评审、可版本管理。
-              </p>
+              <p>业务能力沉淀为 Skills，智能员工组合调用；可复用、可评审、可版本管理——无需脆弱手搭工作流。</p>
             </div>
             <div class="feature-row">
               <h3>RAG 知识库</h3>
-              <p>
-                企业文档与制度进入可检索知识层，支撑专业问答、营销话术与运维知识引用，降低幻觉风险对业务的影响。
-              </p>
+              <p>企业文档与制度进入可检索知识层，支撑专业问答、营销话术与运维知识引用。</p>
             </div>
             <div class="feature-row">
               <h3>MCP / CLI / API 连接器</h3>
-              <p>
-                通过标准协议与接口对接内部系统、工具与脚本环境，让智能体进入真实业务闭环，而非停留在对话层。
-              </p>
+              <p>标准协议对接内部系统与工具，让智能体进入真实业务闭环。</p>
             </div>
             <div class="feature-row">
               <h3>Automation</h3>
-              <p>将可重复任务自动化执行，与智能员工协同，覆盖值守、批处理与流程接力等场景。</p>
+              <p>可重复任务自动化执行，与智能员工协同覆盖值守、批处理与流程接力。</p>
             </div>
             <div class="feature-row">
               <h3>多租户权限</h3>
-              <p>面向集团与多法人、多部门部署：租户隔离、角色授权，满足银行与大型企业的组织边界。</p>
+              <p>面向集团与多法人、多部门：租户隔离、角色授权。</p>
             </div>
             <div class="feature-row">
               <h3>审核中心</h3>
@@ -92,41 +114,39 @@
             </div>
             <div class="feature-row">
               <h3>Skill 安全扫描</h3>
-              <p>在 Skills 进入生产前进行安全扫描，识别高风险能力与不当调用模式。</p>
+              <p>Skills 进入生产前扫描高风险能力与不当调用模式。</p>
             </div>
             <div class="feature-row">
               <h3>审计与沙箱</h3>
-              <p>操作可追溯；敏感执行可在沙箱中隔离验证，符合金融场景对留痕与可控试错的要求。</p>
+              <p>操作可追溯；敏感执行可在沙箱隔离验证。</p>
             </div>
             <div class="feature-row">
               <h3>浏览器插件 &amp; WPS 插件</h3>
-              <p>嵌入员工日常办公入口，减少切换成本，让智能体出现在真实工作界面中。</p>
+              <p>嵌入日常办公入口，减少切换成本。</p>
             </div>
             <div class="feature-row">
               <h3>微信通道</h3>
-              <p>通过企业常用即时通道触达用户，适合通知、轻问询与移动场景衔接。</p>
+              <p>企业常用即时通道触达，适合通知与轻问询。</p>
             </div>
             <div class="feature-row">
               <h3>可信站点非侵入集成</h3>
-              <p>在已信任的业务站点以非侵入方式集成能力，降低改造存量系统的阻力。</p>
+              <p>在已信任业务站点以非侵入方式集成，降低存量改造阻力。</p>
             </div>
             <div class="feature-row">
               <h3>入驻智能体（Dify / FastGPT / HiAgent）</h3>
-              <p>
-                支持基于 Dify、FastGPT、HiAgent 等构建的智能体入驻与纳入治理，保护既有投入、统一运营界面。
-              </p>
+              <p>既有智能体可入驻并纳入统一治理，保护投入、统一运营。</p>
             </div>
           </div>
         </div>
       </section>
 
-      <section class="section-ink cta-band">
+      <section class="section-void cta-band">
         <div class="wrap">
-          <p class="eyebrow">评估合作</p>
+          <p class="eyebrow" style="justify-content: center">评估合作</p>
           <h2 class="section-title">需要架构评审或安全答疑？</h2>
-          <p class="section-desc">预约演示时可指定「平台与治理」议程，我们按贵司现状准备对照材料。</p>
+          <p class="section-desc">预约时可指定「平台与治理」议程。</p>
           <div class="cta-actions">
-            <a class="btn btn-primary" href="contact.html">预约演示</a>
+            <a class="btn btn-accent" href="contact.html">预约演示</a>
           </div>
         </div>
       </section>

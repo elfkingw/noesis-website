@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Noto+Sans+SC:wght@400;500;600&family=Noto+Serif+SC:wght@600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Noto+Sans+SC:wght@400;500;600&family=Noto+Serif+SC:wght@600;700&family=Sora:wght@400;500;600&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles.css" />
@@ -36,27 +36,42 @@
     </header>
 
     <main>
-      <section class="hero hero-page">
+      <section class="hero hero-page hero-simple">
         <div class="hero-bg" aria-hidden="true"></div>
         <div class="hero-inner">
-          <p class="hero-brand reveal">
-            <span class="zh">新致新知</span>
-            <span class="en">Noesis AI</span>
-          </p>
-          <h1 class="reveal reveal-delay-1">试点与落地，比口号更有说服力</h1>
-          <p class="hero-lead reveal reveal-delay-2">
-            以下案例仅陈述已确认的合作与能力范围，不虚构量化指标。欢迎预约沟通获取与贵司场景更贴近的材料。
-          </p>
-          <div class="hero-actions reveal reveal-delay-3">
-            <a class="btn btn-primary" href="contact.html">预约同类场景沟通</a>
-            <a class="btn btn-ghost" href="solutions.html">返回解决方案</a>
+          <div class="hero-copy">
+            <p class="hero-brand reveal">
+              <span class="zh">新致新知</span>
+              <span class="en">Noesis AI</span>
+            </p>
+            <h1 class="reveal reveal-delay-1">试点与落地，比口号更有说服力</h1>
+            <p class="hero-lead reveal reveal-delay-2">
+              以下仅陈述已确认的合作与能力范围，不虚构量化指标。欢迎预约获取与贵司场景更贴近的材料。
+            </p>
+            <div class="hero-actions reveal reveal-delay-3">
+              <a class="btn btn-accent" href="contact.html">预约同类场景沟通</a>
+              <a class="btn btn-ghost" href="solutions.html">返回解决方案</a>
+            </div>
           </div>
         </div>
       </section>
 
-      <section class="section section-mist">
+      <section class="section section-void">
         <div class="wrap">
-          <article class="case-block" id="ccb">
+          <div class="trust-strip reveal-on-scroll">
+            <div class="label">提及机构</div>
+            <div class="trust-logos">
+              <span>建设银行天津市分行</span>
+              <span>东亚银行</span>
+              <span>上海新致软件</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-light">
+        <div class="wrap">
+          <article class="case-block reveal-on-scroll" id="ccb">
             <p class="case-label">案例 A · 银行信贷 AI 营销</p>
             <h2>建设银行天津市分行 — 首批试点</h2>
             <p class="lede">
@@ -66,13 +81,11 @@
               <li>场景：信贷营销智能化，试点落地于建行天津分行</li>
               <li>示例能力：家装分期场景的商户智能推荐</li>
               <li>平台关联：Skills 智能员工 + 知识库 + 审核与审计</li>
-              <li>
-                <a href="solutions.html#credit" style="color: var(--jade)">对应方案：银行信贷 AI 营销 →</a>
-              </li>
+              <li><a href="solutions.html#credit">对应方案：银行信贷 AI 营销 →</a></li>
             </ul>
           </article>
 
-          <article class="case-block" id="bea">
+          <article class="case-block reveal-on-scroll" id="bea">
             <p class="case-label">案例 B · 智能运维决策</p>
             <h2>东亚银行 — 智能运维决策系统落地</h2>
             <p class="lede">
@@ -83,13 +96,11 @@
               <li>根因分析（RCA）：辅助定位问题源头</li>
               <li>影响分析：评估波及范围与优先级</li>
               <li>处置协同与运维问答：经验可检索、动作可衔接</li>
-              <li>
-                <a href="solutions.html#ops" style="color: var(--jade)">对应方案：智能运维决策系统 →</a>
-              </li>
+              <li><a href="solutions.html#ops">对应方案：智能运维决策系统 →</a></li>
             </ul>
           </article>
 
-          <article class="case-block">
+          <article class="case-block reveal-on-scroll">
             <p class="case-label">方法论</p>
             <h2>FDE：让试点走到可复制</h2>
             <p class="lede">
@@ -100,20 +111,18 @@
               <li>共创首个高价值场景闭环</li>
               <li>纳入多租户权限、审核与安全扫描基线</li>
               <li>沉淀可复制的 Skills 与集成模板</li>
-              <li>
-                <a href="solutions.html#fde" style="color: var(--jade)">对应方案：企业 AI 转型服务 →</a>
-              </li>
+              <li><a href="solutions.html#fde">对应方案：企业 AI 转型服务 →</a></li>
             </ul>
           </article>
         </div>
       </section>
 
-      <section class="section-ink cta-band">
+      <section class="section-void cta-band">
         <div class="wrap">
           <h2 class="section-title">希望了解与贵司更接近的落地路径？</h2>
           <p class="section-desc">留下场景偏好，我们将安排对应顾问沟通。</p>
           <div class="cta-actions">
-            <a class="btn btn-primary" href="contact.html">预约演示</a>
+            <a class="btn btn-accent" href="contact.html">预约演示</a>
           </div>
         </div>
       </section>
