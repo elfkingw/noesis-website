@@ -46,6 +46,14 @@ export interface DownloadItem {
   meta: string[];
 }
 
+export interface HeroSlide {
+  kind: "image" | "video";
+  title: string;
+  text: string;
+  src: string;
+  poster?: string;
+}
+
 export interface PageCopy {
   lang: L;
   siteName: string;
@@ -64,6 +72,7 @@ export interface PageCopy {
     ctaSecondary: string;
     trust: string[];
     scroll: string;
+    slides: HeroSlide[];
   };
   capabilities: {
     eyebrow: string;
@@ -330,6 +339,11 @@ const zh: PageCopy = {
     ctaSecondary: "探索产品能力",
     trust: ["上海新致软件出品", "建行天津分行信贷营销试点", "东亚银行智能运维落地", "支持私有化与多租户"],
     scroll: "向下滚动了解更多",
+    slides: [
+      { kind: "image", title: "个人助手", text: "在对话里切换智能体、选择技能。", src: "/hero/assistant.png" },
+      { kind: "image", title: "分析报告", text: "生成图表并导出文档。", src: "/hero/report-v2.png" },
+      { kind: "image", title: "调用过程", text: "分步执行，过程可以回看。", src: "/hero/workflow.png" },
+    ],
   },
   capabilities: {
     eyebrow: "核心能力",
@@ -665,6 +679,11 @@ const en: PageCopy = {
     ctaSecondary: "Explore product",
     trust: ["By Shanghai Newtouch Software", "CCB Tianjin credit marketing pilot", "Bank of East Asia ops decisioning", "Private deploy & multi-tenant"],
     scroll: "Scroll to learn more",
+    slides: [
+      { kind: "image", title: "Personal assistant", text: "Switch agents and pick a skill in the conversation.", src: "/hero/assistant.png" },
+      { kind: "image", title: "Analysis report", text: "Charts and an exported document.", src: "/hero/report-v2.png" },
+      { kind: "image", title: "Run trace", text: "Step through the work and review it.", src: "/hero/workflow.png" },
+    ],
   },
   capabilities: {
     eyebrow: "Core Capabilities",
