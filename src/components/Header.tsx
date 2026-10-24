@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useId, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { brand, cta, nav } from "@/content/site";
 
 export function Header() {
@@ -103,15 +104,18 @@ export function Header() {
       ref={headerRef}
       className={`site-header${scrolled ? " is-scrolled" : ""}${open ? " is-menu-open" : ""}`}
     >
-      {open ? (
-        <button
-          type="button"
-          className="nav-backdrop"
-          aria-label="关闭菜单"
-          tabIndex={-1}
-          onClick={closeMenu}
-        />
-      ) : null}
+      {open
+        ? createPortal(
+            <button
+              type="button"
+              className="nav-backdrop"
+              aria-label="关闭菜单"
+              tabIndex={-1}
+              onClick={closeMenu}
+            />,
+            document.body,
+          )
+        : null}
       <div className="nav-inner">
         <Link
           className="brand"
