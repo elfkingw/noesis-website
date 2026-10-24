@@ -1,5 +1,6 @@
 ---
 import Base from "@/layouts/Base.astro";
+import HeroCarousel from "@/components/HeroCarousel.astro";
 import Icon from "@/components/Icon.astro";
 import type { L } from "@/data/content";
 import { withBase } from "@/lib/paths";
@@ -35,6 +36,14 @@ const zh = lang === "zh";
           </a>
         </div>
       </div>
+      <HeroCarousel
+        slides={c.hero.slides}
+        label={zh ? "产品效果" : "Product"}
+        prevLabel={zh ? "上一张" : "Previous"}
+        nextLabel={zh ? "下一张" : "Next"}
+        imageLabel={zh ? "图片" : "Image"}
+        videoLabel={zh ? "视频" : "Video"}
+      />
       <div class="hero__trust reveal">
         {c.hero.trust.map((t) => (
           <span class="trust__item">
