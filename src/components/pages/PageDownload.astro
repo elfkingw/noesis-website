@@ -119,6 +119,8 @@ const d = c.download;
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
+    gap: 12px;
+    flex-wrap: wrap;
   }
   .dl__meta {
     list-style: none;
@@ -159,7 +161,14 @@ const d = c.download;
     display: inline-flex;
     align-items: center;
     gap: 6px;
+    min-height: 44px;
     font-weight: 600;
     color: var(--brand);
+  }
+  @media (max-width: 640px) {
+    .dl__doc {
+      flex-direction: column;
+      gap: 12px;
+    }
   }
 </style>

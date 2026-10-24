@@ -109,7 +109,10 @@ const p = c.product;
     border: 1px solid rgba(31, 79, 216, 0.15);
   }
   .table-wrap {
+    max-width: 100%;
+    min-width: 0;
     overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
     box-shadow: var(--shadow);
     border: 1px solid var(--line);
     border-radius: var(--radius);

@@ -12,7 +12,7 @@ const name = lang === "zh" ? "新致新知 Noesis AI" : "Noesis AI";
 const sub = lang === "zh" ? "企业级智能体平台" : "Enterprise Agent Platform";
 ---
 <a href={withBase(lang === "zh" ? "/" : "/en/")} class="logo" aria-label={name}>
-  <img src="/logo.svg" alt="" class="logo__mark" width="40" height="40" />
+  <img src={withBase("/logo.svg")} alt="" class="logo__mark" width="40" height="40" />
   <span class="logo__text" aria-hidden="true">
     <span class="logo__name">{name}</span>
     <span class="logo__sub">{sub}</span>
@@ -36,6 +36,7 @@ const sub = lang === "zh" ? "企业级智能体平台" : "Enterprise Agent Platf
     display: flex;
     flex-direction: column;
     line-height: 1.1;
+    min-width: 0;
   }
   .logo__name {
     font-size: 16px;
@@ -57,12 +58,18 @@ const sub = lang === "zh" ? "企业级智能体平台" : "Enterprise Agent Platf
     color: rgba(255, 255, 255, 0.6);
   }
   @media (max-width: 640px) {
+    .logo {
+      gap: 8px;
+    }
     .logo__mark {
       width: 34px;
       height: 34px;
     }
     .logo__name {
-      font-size: 17px;
+      font-size: 14px;
+    }
+    .logo__sub {
+      display: none;
     }
   }
 </style>
