@@ -347,9 +347,9 @@ const zh: PageCopy = {
     trust: ["上海新致软件出品", "建行天津分行信贷营销试点", "东亚银行智能运维落地", "支持私有化与多租户"],
     scroll: "向下滚动了解更多",
     slides: [
-      { kind: "image", title: "知识检索", text: "先查企业知识，再回答。", src: "/hero/retrieve.png" },
-      { kind: "video", title: "一次运行", text: "从提问、调用 Skill，到留下审计。", src: "/hero/run.mp4", poster: "/hero/run.png" },
-      { kind: "image", title: "审计记录", text: "每次调用都留在记录里。", src: "/hero/audit.png" },
+      { kind: "image", title: "个人助手", text: "在对话里切换智能体、选择技能。", src: "/hero/assistant.png" },
+      { kind: "image", title: "分析报告", text: "生成图表并导出文档。", src: "/hero/report.png" },
+      { kind: "image", title: "调用过程", text: "分步执行，过程可以回看。", src: "/hero/workflow.png" },
     ],
   },
   capabilities: {
@@ -707,9 +707,9 @@ const en: PageCopy = {
     trust: ["By Shanghai Newtouch Software", "CCB Tianjin credit marketing pilot", "Bank of East Asia ops decisioning", "Private deploy & multi-tenant"],
     scroll: "Scroll to learn more",
     slides: [
-      { kind: "image", title: "Knowledge retrieval", text: "Answer from company knowledge first.", src: "/hero/retrieve.png" },
-      { kind: "video", title: "One run", text: "From the question and the Skill call to the audit trail.", src: "/hero/run.mp4", poster: "/hero/run.png" },
-      { kind: "image", title: "Audit trail", text: "Every call stays on the record.", src: "/hero/audit.png" },
+      { kind: "image", title: "Personal assistant", text: "Switch agents and pick a skill in the conversation.", src: "/hero/assistant.png" },
+      { kind: "image", title: "Analysis report", text: "Charts and an exported document.", src: "/hero/report.png" },
+      { kind: "image", title: "Run trace", text: "Step through the work and review it.", src: "/hero/workflow.png" },
     ],
   },
   capabilities: {
