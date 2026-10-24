@@ -54,16 +54,24 @@ const switchHref = (): string => {
       </a>
       <button
         class="nav__toggle"
-        aria-label="Menu"
+        type="button"
+        aria-label={lang === "zh" ? "打开菜单" : "Open menu"}
         aria-expanded="false"
+        aria-controls="site-drawer"
         data-nav-toggle
+        data-label-open={lang === "zh" ? "打开菜单" : "Open menu"}
+        data-label-close={lang === "zh" ? "关闭菜单" : "Close menu"}
       >
-        <span></span><span></span><span></span>
+        <span class="nav__bars" aria-hidden="true">
+          <span></span><span></span><span></span>
+        </span>
       </button>
     </div>
   </div>
 
-  <div class="nav__drawer" data-nav-drawer>
+  <button class="nav__backdrop" type="button" data-nav-backdrop hidden aria-label={lang === "zh" ? "关闭菜单" : "Close menu"}></button>
+
+  <div class="nav__drawer" id="site-drawer" data-nav-drawer hidden>
     <nav class="nav__drawer-links" aria-label="Mobile">
       {c.nav.links.map((link) => (
         <a href={withBase(link.href)} class:list={["nav__drawer-link", { "nav__drawer-link--active": isActive(link.href) }]}>
@@ -80,17 +88,31 @@ const switchHref = (): string => {
 <script>
   const toggle = document.querySelector<HTMLButtonElement>("[data-nav-toggle]");
   const drawer = document.querySelector<HTMLElement>("[data-nav-drawer]");
-  if (toggle && drawer) {
-    toggle.addEventListener("click", () => {
-      const open = drawer.classList.toggle("nav__drawer--open");
-      toggle.setAttribute("aria-expanded", String(open));
+  const backdrop = document.querySelector<HTMLButtonElement>("[data-nav-backdrop]");
+  const root = document.documentElement;
+
+  const setOpen = (open: boolean) => {
+    if (!toggle || !drawer || !backdrop) return;
+    drawer.hidden = !open;
+    backdrop.hidden = !open;
+    toggle.setAttribute("aria-expanded", String(open));
+    toggle.setAttribute("aria-label", open ? toggle.dataset.labelClose || "" : toggle.dataset.labelOpen || "");
+    root.classList.toggle("nav-open", open);
+  };
+
+  if (toggle && drawer && backdrop) {
+    toggle.addEventListener("click", () => setOpen(drawer.hidden));
+    backdrop.addEventListener("click", () => setOpen(false));
+    drawer.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => setOpen(false)));
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && !drawer.hidden) {
+        setOpen(false);
+        toggle.focus();
+      }
     });
-    drawer.querySelectorAll("a").forEach((a) =>
-      a.addEventListener("click", () => {
-        drawer.classList.remove("nav__drawer--open");
-        toggle.setAttribute("aria-expanded", "false");
-      })
-    );
+    window.matchMedia("(min-width: 901px)").addEventListener("change", (event) => {
+      if (event.matches) setOpen(false);
+    });
   }
 </script>
 
@@ -99,17 +121,20 @@ const switchHref = (): string => {
     position: sticky;
     top: 0;
     z-index: 60;
-    background: rgba(255, 255, 255, 0.86);
+    background: rgba(255, 255, 255, 0.94);
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
     border-bottom: 1px solid var(--line);
+    padding-top: env(safe-area-inset-top, 0px);
   }
   .nav__inner {
+    position: relative;
+    z-index: 2;
     height: 72px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 24px;
+    gap: 16px;
   }
   .nav__links {
     display: flex;
@@ -138,6 +163,10 @@ const switchHref = (): string => {
     gap: 12px;
   }
   .nav__lang {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 40px;
     font-size: 13px;
     font-weight: 600;
     color: var(--ink-soft);
@@ -155,35 +184,80 @@ const switchHref = (): string => {
   }
   .nav__toggle {
     display: none;
-    flex-direction: column;
-    gap: 5px;
-    background: none;
-    border: 0;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    flex: 0 0 auto;
+    background: var(--bg-soft);
+    border: 1px solid var(--line);
+    border-radius: 12px;
     cursor: pointer;
-    padding: 8px;
+    padding: 0;
   }
-  .nav__toggle span {
-    width: 22px;
+  .nav__bars {
+    display: grid;
+    gap: 5px;
+    width: 18px;
+  }
+  .nav__bars span {
+    display: block;
     height: 2px;
+    width: 100%;
     background: var(--ink);
     border-radius: 2px;
+    transform-origin: center;
     transition: transform 0.2s ease, opacity 0.2s ease;
   }
-  .nav__drawer {
+  .nav__toggle[aria-expanded="true"] .nav__bars span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+  .nav__toggle[aria-expanded="true"] .nav__bars span:nth-child(2) {
+    opacity: 0;
+  }
+  .nav__toggle[aria-expanded="true"] .nav__bars span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+  .nav__backdrop {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100dvh;
+    border: 0;
+    padding: 0;
+    background: rgba(11, 23, 48, 0.45);
+    cursor: pointer;
+  }
+  .nav__backdrop[hidden] {
     display: none;
+  }
+  .nav__drawer {
+    position: absolute;
+    z-index: 2;
+    top: 100%;
+    left: 0;
+    right: 0;
+    max-height: calc(100dvh - 72px - env(safe-area-inset-top, 0px));
+    overflow-y: auto;
     border-top: 1px solid var(--line);
     background: #fff;
-    padding: 16px 24px 24px;
+    padding: 8px 16px calc(16px + env(safe-area-inset-bottom, 0px));
+    box-shadow: 0 18px 40px rgba(11, 21, 38, 0.12);
   }
-  .nav__drawer--open {
-    display: block;
+  .nav__drawer[hidden] {
+    display: none;
   }
   .nav__drawer-links {
     display: grid;
     gap: 4px;
   }
   .nav__drawer-link {
-    padding: 12px 4px;
+    display: flex;
+    align-items: center;
+    min-height: 48px;
+    padding: 10px 8px;
     font-size: 16px;
     font-weight: 500;
     color: var(--ink);
@@ -194,16 +268,21 @@ const switchHref = (): string => {
   }
   .nav__drawer-links .btn {
     margin-top: 16px;
+    min-height: 48px;
   }
   @media (max-width: 900px) {
     .nav__links {
       display: none;
     }
     .nav__toggle {
-      display: flex;
+      display: inline-flex;
     }
     .nav__cta {
       display: none;
+    }
+    .nav__lang {
+      min-height: 44px;
+      padding: 8px 12px;
     }
   }
 </style>
