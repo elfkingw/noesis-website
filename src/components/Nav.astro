@@ -86,7 +86,7 @@ const switchHref = (): string => {
           {link.label}
         </a>
       ))}
-      <a href={withBase(lang === "zh" ? "/contact/" : "/en/contact/")} class="btn btn--primary">
+      <a href={withBase(lang === "zh" ? "/contact/" : "/en/contact/")} class="nav__drawer-cta">
         {c.nav.cta}
       </a>
     </nav>
@@ -253,9 +253,8 @@ const switchHref = (): string => {
     height: 100dvh;
     border: 0;
     padding: 0;
-    background: rgba(11, 23, 48, 0.56);
+    background: var(--bg-soft);
     cursor: pointer;
-    animation: nav-fade 0.18s ease;
   }
   .nav__backdrop[hidden] {
     display: none;
@@ -263,32 +262,25 @@ const switchHref = (): string => {
   .nav__drawer {
     position: fixed;
     z-index: 80;
-    top: calc(var(--nav-h, 72px) + 10px);
-    left: max(12px, env(safe-area-inset-left));
-    right: max(12px, env(safe-area-inset-right));
+    top: var(--nav-h, 72px);
+    left: 0;
+    right: 0;
+    bottom: 0;
     width: auto;
-    max-height: calc(100dvh - var(--nav-h, 72px) - 24px - env(safe-area-inset-bottom, 0px));
     overflow-y: auto;
     overscroll-behavior: contain;
-    border-radius: 20px;
-    background: #fff;
-    padding: 8px 10px 14px;
-    box-shadow: 0 24px 60px rgba(11, 21, 38, 0.28);
-    animation: nav-pop 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+    background: var(--bg-soft);
+    padding: 18px max(16px, env(safe-area-inset-right)) calc(20px + env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left));
+    animation: nav-pop 0.2s ease;
   }
   .nav__drawer[hidden] {
     display: none;
   }
-  @keyframes nav-fade {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
   @keyframes nav-pop {
-    from { opacity: 0; transform: translateY(-12px) scale(0.98); }
+    from { opacity: 0; transform: translateY(-8px); }
     to { opacity: 1; transform: none; }
   }
   @media (prefers-reduced-motion: reduce) {
-    .nav__backdrop,
     .nav__drawer {
       animation: none;
     }
@@ -300,20 +292,30 @@ const switchHref = (): string => {
   .nav__drawer-link {
     display: flex;
     align-items: center;
-    min-height: 48px;
-    padding: 10px 8px;
-    font-size: 16px;
+    min-height: 52px;
+    padding: 0 14px;
+    border-radius: 12px;
+    font-size: 17px;
     font-weight: 500;
     color: var(--ink);
-    border-bottom: 1px solid var(--line);
   }
   .nav__drawer-link--active {
+    background: rgba(31, 79, 216, 0.1);
     color: var(--brand);
+    font-weight: 600;
   }
-  .nav__drawer-links .btn {
-    width: 100%;
-    margin-top: 14px;
+  .nav__drawer-cta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 22px;
     min-height: 48px;
+    padding: 0 18px;
+    border-radius: 14px;
+    background: var(--navy);
+    color: #fff;
+    font-size: 15px;
+    font-weight: 600;
   }
   @media (max-width: 900px) {
     .nav__links {
