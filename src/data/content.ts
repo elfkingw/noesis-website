@@ -348,7 +348,7 @@ const zh: PageCopy = {
     scroll: "向下滚动了解更多",
     slides: [
       { kind: "image", title: "个人助手", text: "在对话里切换智能体、选择技能。", src: "/hero/assistant.png" },
-      { kind: "image", title: "分析报告", text: "生成图表并导出文档。", src: "/hero/report.png" },
+      { kind: "image", title: "分析报告", text: "生成图表并导出文档。", src: "/hero/report-v2.png" },
       { kind: "image", title: "调用过程", text: "分步执行，过程可以回看。", src: "/hero/workflow.png" },
     ],
   },
@@ -708,7 +708,7 @@ const en: PageCopy = {
     scroll: "Scroll to learn more",
     slides: [
       { kind: "image", title: "Personal assistant", text: "Switch agents and pick a skill in the conversation.", src: "/hero/assistant.png" },
-      { kind: "image", title: "Analysis report", text: "Charts and an exported document.", src: "/hero/report.png" },
+      { kind: "image", title: "Analysis report", text: "Charts and an exported document.", src: "/hero/report-v2.png" },
       { kind: "image", title: "Run trace", text: "Step through the work and review it.", src: "/hero/workflow.png" },
     ],
   },
