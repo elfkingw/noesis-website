@@ -4,6 +4,7 @@ import Footer from "@/components/Footer.astro";
 import type { L } from "@/data/content";
 import { content } from "@/data/content";
 import "@/styles/global.css";
+import { withBase } from "@/lib/paths";
 
 interface Props {
   lang: L;
@@ -15,8 +16,9 @@ interface Props {
 const { lang, pathname, pageKey, noIndex = false } = Astro.props;
 const c = content[lang];
 const meta = c.meta[pageKey];
-const absBase = Astro.site ? new URL(Astro.site).origin : "https://noesis.example.com";
-const canonical = absBase + pathname;
+const siteOrigin = Astro.site ? new URL(Astro.site).origin : "https://elfkingw.github.io";
+const absPath = (p: string) => new URL(withBase(p), siteOrigin + "/").href;
+const canonical = absPath(pathname);
 
 const toZh = (p: string): string =>
   lang === "zh" ? p : p === "/en/" ? "/" : p.replace(/^\/en/, "") || "/";
@@ -33,9 +35,9 @@ const toEn = (p: string): string =>
     {noIndex && <meta name="robots" content="noindex" />}
 
     <link rel="canonical" href={canonical} />
-    <link rel="alternate" hreflang="zh-CN" href={absBase + toZh(pathname)} />
-    <link rel="alternate" hreflang="en" href={absBase + toEn(pathname)} />
-    <link rel="alternate" hreflang="x-default" href={absBase + toZh(pathname)} />
+    <link rel="alternate" hreflang="zh-CN" href={absPath(toZh(pathname))} />
+    <link rel="alternate" hreflang="en" href={absPath(toEn(pathname))} />
+    <link rel="alternate" hreflang="x-default" href={absPath(toZh(pathname))} />
 
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content={c.siteName} />
@@ -46,7 +48,7 @@ const toEn = (p: string): string =>
     <meta name="twitter:title" content={meta.title} />
     <meta name="twitter:description" content={meta.description} />
 
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href={withBase("/favicon.svg")} />
   </head>
   <body>
     <Nav lang={lang} pathname={pathname} />

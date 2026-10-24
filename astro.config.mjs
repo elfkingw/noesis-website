@@ -2,7 +2,8 @@ import { defineConfig } from "astro/config";
 import sitemap from "@astrojs/sitemap";
 
 export default defineConfig({
-  site: "https://noesis.example.com",
+  site: "https://elfkingw.github.io",
+  base: "/noesis-website/",
   output: "static",
   i18n: {
     defaultLocale: "zh",

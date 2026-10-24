@@ -2,6 +2,7 @@
 import Logo from "./Logo.astro";
 import type { L } from "@/data/content";
 import { content } from "@/data/content";
+import { withBase } from "@/lib/paths";
 
 interface Props {
   lang: L;
@@ -32,7 +33,7 @@ const switchHref = (): string => {
     <nav class="nav__links" aria-label="Primary">
       {c.nav.links.map((link) => (
         <a
-          href={link.href}
+          href={withBase(link.href)}
           class:list={["nav__link", { "nav__link--active": isActive(link.href) }]}
         >
           {link.label}
@@ -43,12 +44,12 @@ const switchHref = (): string => {
     <div class="nav__actions">
       <a
         class="nav__lang"
-        href={switchHref()}
+        href={withBase(switchHref())}
         title={c.nav.switchTo}
       >
         {c.nav.switchTo}
       </a>
-      <a href={lang === "zh" ? "/contact/" : "/en/contact/"} class="btn btn--primary nav__cta">
+      <a href={withBase(lang === "zh" ? "/contact/" : "/en/contact/")} class="btn btn--primary nav__cta">
         {c.nav.cta}
       </a>
       <button
@@ -65,11 +66,11 @@ const switchHref = (): string => {
   <div class="nav__drawer" data-nav-drawer>
     <nav class="nav__drawer-links" aria-label="Mobile">
       {c.nav.links.map((link) => (
-        <a href={link.href} class:list={["nav__drawer-link", { "nav__drawer-link--active": isActive(link.href) }]}>
+        <a href={withBase(link.href)} class:list={["nav__drawer-link", { "nav__drawer-link--active": isActive(link.href) }]}>
           {link.label}
         </a>
       ))}
-      <a href={lang === "zh" ? "/contact/" : "/en/contact/"} class="btn btn--primary">
+      <a href={withBase(lang === "zh" ? "/contact/" : "/en/contact/")} class="btn btn--primary">
         {c.nav.cta}
       </a>
     </nav>

@@ -1,5 +1,6 @@
 ---
 import type { L } from "@/data/content";
+import { withBase } from "@/lib/paths";
 
 interface Props {
   lang: L;
@@ -10,7 +11,7 @@ const { lang, light = false } = Astro.props;
 const name = lang === "zh" ? "新致新知 Noesis AI" : "Noesis AI";
 const sub = lang === "zh" ? "企业级智能体平台" : "Enterprise Agent Platform";
 ---
-<a href={lang === "zh" ? "/" : "/en/"} class="logo" aria-label={name}>
+<a href={withBase(lang === "zh" ? "/" : "/en/")} class="logo" aria-label={name}>
   <img src="/logo.svg" alt="" class="logo__mark" width="40" height="40" />
   <span class="logo__text" aria-hidden="true">
     <span class="logo__name">{name}</span>

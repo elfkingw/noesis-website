@@ -2,6 +2,7 @@
 import Base from "@/layouts/Base.astro";
 import Icon from "@/components/Icon.astro";
 import type { L } from "@/data/content";
+import { withBase } from "@/lib/paths";
 import { content } from "@/data/content";
 
 interface Props {
@@ -78,7 +79,7 @@ const SALES_EMAIL = "sales@noesis.example.com";
         <span class="eyebrow">{ct.alt.title}</span>
         <div class="contact__alt">
           {ct.alt.items.map((item) => (
-            <a class="contact__alt-item" href={item.href}>
+            <a class="contact__alt-item" href={item.href?.startsWith("http") ? item.href : withBase(item.href || "#")}>
               <div class="card__icon"><Icon name={item.icon} size={26} /></div>
               <div>
                 <h3 class="card__title">{item.title}</h3>
