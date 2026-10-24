@@ -49,7 +49,7 @@ src/
 ├── layouts/Base.astro     # 页头、页脚和 meta
 ├── styles/global.css
 └── lib/paths.ts           # 给站内链接加上 base
-public/                    # logo.svg、.nojekyll
+public/                    # logo.png、.nojekyll
 ```
 
 中英文案都在 `src/data/content.ts`。改文案后跑一次 `npm run check:brand`。
