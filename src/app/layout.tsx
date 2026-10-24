@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import {
   Instrument_Serif,
   Noto_Sans_SC,
@@ -38,6 +38,13 @@ const notoSans = Noto_Sans_SC({
   variable: "--font-noto-sans",
   display: "swap",
 });
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+  themeColor: "#030306",
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
