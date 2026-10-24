@@ -1,7 +1,6 @@
 ---
 import Base from "@/layouts/Base.astro";
 import type { L } from "@/data/content";
-import { withBase } from "@/lib/paths";
 import { content } from "@/data/content";
 
 interface Props {
@@ -11,7 +10,6 @@ interface Props {
 
 const { lang, pathname } = Astro.props;
 const c = content[lang];
-const zh = lang === "zh";
 const p = c.product;
 ---
 <Base lang={lang} pathname={pathname} pageKey="product">
@@ -53,38 +51,6 @@ const p = c.product;
       </div>
     </section>
   ))}
-
-  <section class="section section--soft">
-    <div class="container">
-      <div class="section__head section__head--center">
-        <span class="eyebrow">{p.featureTable.eyebrow}</span>
-        <h2 class="section__title">{p.featureTable.title}</h2>
-        <p class="section__sub">{p.featureTable.sub}</p>
-      </div>
-      <div class="table-wrap reveal">
-        <table class="feat">
-          <thead>
-            <tr>
-              {p.featureTable.headers.map((h) => <th scope="col">{h}</th>)}
-            </tr>
-          </thead>
-          <tbody>
-            {p.featureTable.rows.map((row) => (
-              <tr>
-                {row.map((cell, ci) => <td>{ci === 0 ? <strong>{cell}</strong> : cell}</td>)}
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-      <div class="section__more">
-        <a href={withBase(zh ? "/contact/" : "/en/contact/")} class="btn btn--primary">
-          {zh ? "预约演示，看看如何落地" : "Book a demo"}
-          <span class="btn__arrow">→</span>
-        </a>
-      </div>
-    </div>
-  </section>
 </Base>
 
 <style>
@@ -107,47 +73,5 @@ const p = c.product;
     border-radius: 12px;
     background: linear-gradient(160deg, rgba(31, 79, 216, 0.14), rgba(31, 79, 216, 0.05));
     border: 1px solid rgba(31, 79, 216, 0.15);
-  }
-  .table-wrap {
-    max-width: 100%;
-    min-width: 0;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    box-shadow: var(--shadow);
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    background: #fff;
-  }
-  .feat {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 14.5px;
-  }
-  .feat th {
-    text-align: left;
-    padding: 16px 20px;
-    background: var(--bg-soft);
-    color: var(--ink-soft);
-    font-weight: 600;
-    white-space: nowrap;
-  }
-  .feat td {
-    padding: 14px 20px;
-    border-top: 1px solid var(--line);
-    color: var(--ink-soft);
-    vertical-align: top;
-  }
-  .feat td strong {
-    color: var(--ink);
-    white-space: nowrap;
-  }
-  .feat tbody tr:hover {
-    background: #fafcff;
-  }
-  @media (max-width: 720px) {
-    .feat th,
-    .feat td {
-      padding: 12px 14px;
-    }
   }
 </style>

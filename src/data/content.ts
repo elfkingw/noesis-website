@@ -89,13 +89,6 @@ export interface PageCopy {
   product: {
     hero: { eyebrow: string; title: string; sub: string };
     sections: FeatureSection[];
-    featureTable: {
-      eyebrow: string;
-      title: string;
-      sub: string;
-      headers: string[];
-      rows: string[][];
-    };
   };
   download: {
     hero: { eyebrow: string; title: string; sub: string };
@@ -366,26 +359,6 @@ const zh: PageCopy = {
       sub: "以 Skills 为核心构建可治理的智能员工运行时——覆盖知识、连接、自动化、权限与安全，面向对公与银行 IT 的交付标准。",
     },
     sections: zhProductSections,
-    featureTable: {
-      eyebrow: "功能全景",
-      title: "功能清单",
-      sub: "覆盖使用、管理、权限与对接的完整能力矩阵。",
-      headers: ["模块", "功能", "说明"],
-      rows: [
-        ["使用面板", "个人助手 / 智能体 / 知识库", "智能体 Web 入口、配置与生命周期管理、企业 RAG 知识库"],
-        ["业务能力", "Skills / 技能市场 / 连接器", "Skills 管理调试、技能发现安装共享、MCP/CLI/API 接入"],
-        ["自动化", "定时任务 / 对话设置", "智能体定时任务，也支持通过对话设置"],
-        ["我的应用", "应用登记与发布", "已发布应用的打开与收藏"],
-        ["审核中心", "发布工单审核", "资源发布工单统一审核，流程可控"],
-        ["系统管理", "模型 / 助手 / 对接", "模型管理、个人助手配置、外部 APIKey 对接、Dify 对接"],
-        ["连接器", "MCP / OAuth / HTTP", "外部能力接入与统一管理"],
-        ["远程通道", "微信集成", "微信远程通道管理，对话即服务"],
-        ["可信站点", "业务系统对接", "非侵入式对接业务系统"],
-        ["SSO", "OAuth2 / CAS / LDAP", "统一单点登录配置"],
-        ["权限体系", "用户 / 部门 / 角色 / 群组", "企业级多租户协作权限"],
-        ["任务系统", "任务管理", "对话任务后台监控管理"],
-      ],
-    },
   },
   download: {
     hero: {
@@ -721,26 +694,6 @@ const en: PageCopy = {
       sub: "A Skills-centered, governable digital-employee runtime — knowledge, connectors, automation, permissions and security for corporate and banking IT.",
     },
     sections: enProductSections,
-    featureTable: {
-      eyebrow: "Full Feature Map",
-      title: "Feature list",
-      sub: "A complete capability matrix across usage, administration, permission and integration.",
-      headers: ["Module", "Feature", "Description"],
-      rows: [
-        ["Workspace", "Assistant / Agent / Knowledge", "Agent web portal, config & lifecycle, enterprise RAG knowledge base"],
-        ["Capabilities", "Skills / Marketplace / Connectors", "Skill management & debugging, discovery & sharing, MCP/CLI/API integration"],
-        ["Automation", "Scheduled / Conversation setup", "Scheduled agent tasks, also configured through conversation"],
-        ["My Apps", "App registration & publish", "Open and favorite published apps"],
-        ["Review Center", "Publish ticket review", "Unified, auditable review of resource publishing"],
-        ["Administration", "Models / Assistants / Integrations", "Model management, assistant config, APIKey & Dify integration"],
-        ["Connectors", "MCP / OAuth / HTTP", "External capability integration and management"],
-        ["Remote Channels", "WeChat", "WeChat gateway management — conversation as service"],
-        ["Trusted Sites", "System integration", "Non-intrusive integration with business systems"],
-        ["SSO", "OAuth2 / CAS / LDAP", "Unified single sign-on configuration"],
-        ["Permissions", "Users / Depts / Roles / Groups", "Enterprise-grade multi-tenant collaboration"],
-        ["Task System", "Task management", "Backend monitoring of conversation tasks"],
-      ],
-    },
   },
   download: {
     hero: {
