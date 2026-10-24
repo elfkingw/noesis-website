@@ -1,0 +1,170 @@
+---
+import Base from "@/layouts/Base.astro";
+import Icon from "@/components/Icon.astro";
+import type { L } from "@/data/content";
+import { content } from "@/data/content";
+
+interface Props {
+  lang: L;
+  pathname: string;
+}
+
+const { lang, pathname } = Astro.props;
+const c = content[lang];
+const zh = lang === "zh";
+const a = c.about;
+---
+<Base lang={lang} pathname={pathname} pageKey="about">
+  <section class="page-hero">
+    <div class="container page-hero__inner">
+      <span class="eyebrow">{a.hero.eyebrow}</span>
+      <h1 class="page-hero__title">{a.hero.title}</h1>
+      <p class="page-hero__sub">{a.hero.sub}</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container split">
+      <div class="reveal">
+        <span class="eyebrow">{zh ? "新致软件" : "Newtouch Software"}</span>
+        <h2 class="about__title">{a.companyTitle}</h2>
+        <p class="about__text">{a.companyText}</p>
+      </div>
+      <div class="reveal">
+        <div class="about__card">
+          <div class="about__card-name">Noesis</div>
+          <div class="about__card-sub">{c.siteTagline}</div>
+          <div class="about__card-bar"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--soft">
+    <div class="container split split--reverse">
+      <div class="reveal">
+        <span class="eyebrow">{zh ? "品牌故事" : "Brand Story"}</span>
+        <h2 class="about__title">{a.storyTitle}</h2>
+        <p class="about__text">{a.storyText}</p>
+      </div>
+      <div class="reveal">
+        <div class="mock">
+          <div class="mock__bar"></div>
+          <div class="mock__line w75"></div>
+          <div class="mock__line w60"></div>
+          <div class="mock__line w45"></div>
+          <div class="mock__line w30"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section__head section__head--center">
+        <span class="eyebrow">{zh ? "吉祥物" : "Mascot"}</span>
+        <h2 class="section__title">{a.ipTitle}</h2>
+        <p class="section__sub">{a.ipText}</p>
+      </div>
+      <div class="mascot reveal" aria-hidden="true">
+        <svg viewBox="0 0 120 72" width="120" height="72">
+          <ellipse cx="60" cy="60" rx="30" ry="9" fill="#FF6B52" opacity="0.25" />
+          <g fill="#E8482F">
+            <path d="M48 44 L40 28 L34 42 Z" />
+            <path d="M52 40 L48 24 L44 42 Z" />
+            <path d="M74 44 L80 28 L86 42 Z" />
+            <path d="M70 40 L74 24 L78 42 Z" />
+            <rect x="42" y="30" width="36" height="26" rx="14" />
+          </g>
+          <circle cx="52" cy="40" r="2.5" fill="#fff" />
+          <circle cx="69" cy="40" r="2.5" fill="#fff" />
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--soft">
+    <div class="container">
+      <div class="section__head section__head--center">
+        <span class="eyebrow">{a.badgesTitle}</span>
+        <h2 class="section__title">{zh ? "为什么企业可以放心选择 Noesis" : "Why enterprises can trust Noesis"}</h2>
+      </div>
+      <div class="grid grid--3 reveal">
+        {a.badges.map((badge) => (
+          <article class="card badge">
+            <Icon name="shield" size={26} />
+            <p>{badge}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="cta-band reveal">
+        <div>
+          <h2 class="cta-band__title">{zh ? "和 Noesis 一起，让智能服务于结果" : "Partner with Noesis — let intelligence serve results"}</h2>
+          <p class="cta-band__text">{zh ? "联系我们，开启你的企业 AI 之旅。" : "Contact us to start your enterprise AI journey."}</p>
+        </div>
+        <div class="cta-band__actions">
+          <a href={zh ? "/contact/" : "/en/contact/"} class="btn btn--accent">
+            {zh ? "预约演示" : "Book a Demo"}
+            <span class="btn__arrow">→</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .about__title {
+    font-size: clamp(24px, 3vw, 36px);
+    margin-bottom: 16px;
+  }
+  .about__text {
+    color: var(--ink-soft);
+    font-size: 16px;
+  }
+  .about__card {
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 34px;
+    background: linear-gradient(160deg, #0f1f45, #0b1730);
+    color: #fff;
+    box-shadow: var(--shadow-lg);
+  }
+  .about__card-name {
+    font-size: 34px;
+    font-weight: 800;
+    letter-spacing: 0.02em;
+  }
+  .about__card-sub {
+    margin-top: 8px;
+    color: #8fa4d6;
+    font-size: 14px;
+    letter-spacing: 0.04em;
+  }
+  .about__card-bar {
+    margin-top: 22px;
+    height: 6px;
+    width: 55%;
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--brand), #7aa0ff);
+  }
+  .mascot {
+    display: grid;
+    place-items: center;
+    padding: 28px 0 8px;
+  }
+  .badge {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .badge p {
+    font-weight: 600;
+    color: var(--ink);
+  }
+</style>

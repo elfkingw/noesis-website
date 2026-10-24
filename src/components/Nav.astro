@@ -1,0 +1,208 @@
+---
+import Logo from "./Logo.astro";
+import type { L } from "@/data/content";
+import { content } from "@/data/content";
+
+interface Props {
+  lang: L;
+  pathname: string;
+}
+
+const { lang, pathname } = Astro.props;
+const c = content[lang];
+
+const isActive = (href: string): boolean => {
+  if (href === "/" || href === "/en/") {
+    return pathname === href;
+  }
+  return pathname.startsWith(href.replace(/\/$/, ""));
+};
+
+const switchHref = (): string => {
+  if (lang === "zh") {
+    return "/en" + (pathname === "/" ? "/" : pathname);
+  }
+  return pathname.replace(/^\/en/, "") || "/";
+};
+---
+<header class="nav">
+  <div class="container nav__inner">
+    <Logo lang={lang} />
+
+    <nav class="nav__links" aria-label="Primary">
+      {c.nav.links.map((link) => (
+        <a
+          href={link.href}
+          class:list={["nav__link", { "nav__link--active": isActive(link.href) }]}
+        >
+          {link.label}
+        </a>
+      ))}
+    </nav>
+
+    <div class="nav__actions">
+      <a
+        class="nav__lang"
+        href={switchHref()}
+        title={c.nav.switchTo}
+      >
+        {c.nav.switchTo}
+      </a>
+      <a href={lang === "zh" ? "/contact/" : "/en/contact/"} class="btn btn--primary nav__cta">
+        {c.nav.cta}
+      </a>
+      <button
+        class="nav__toggle"
+        aria-label="Menu"
+        aria-expanded="false"
+        data-nav-toggle
+      >
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+
+  <div class="nav__drawer" data-nav-drawer>
+    <nav class="nav__drawer-links" aria-label="Mobile">
+      {c.nav.links.map((link) => (
+        <a href={link.href} class:list={["nav__drawer-link", { "nav__drawer-link--active": isActive(link.href) }]}>
+          {link.label}
+        </a>
+      ))}
+      <a href={lang === "zh" ? "/contact/" : "/en/contact/"} class="btn btn--primary">
+        {c.nav.cta}
+      </a>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const toggle = document.querySelector<HTMLButtonElement>("[data-nav-toggle]");
+  const drawer = document.querySelector<HTMLElement>("[data-nav-drawer]");
+  if (toggle && drawer) {
+    toggle.addEventListener("click", () => {
+      const open = drawer.classList.toggle("nav__drawer--open");
+      toggle.setAttribute("aria-expanded", String(open));
+    });
+    drawer.querySelectorAll("a").forEach((a) =>
+      a.addEventListener("click", () => {
+        drawer.classList.remove("nav__drawer--open");
+        toggle.setAttribute("aria-expanded", "false");
+      })
+    );
+  }
+</script>
+
+<style>
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 60;
+    background: rgba(255, 255, 255, 0.86);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav__inner {
+    height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+  .nav__links {
+    display: flex;
+    gap: 6px;
+  }
+  .nav__link {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--ink-soft);
+    padding: 8px 14px;
+    border-radius: 999px;
+    transition: color 0.15s ease, background 0.15s ease;
+  }
+  .nav__link:hover {
+    color: var(--ink);
+    background: var(--bg-soft);
+  }
+  .nav__link--active {
+    color: var(--brand);
+    background: rgba(31, 79, 216, 0.08);
+    font-weight: 600;
+  }
+  .nav__actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .nav__lang {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink-soft);
+    border: 1px solid var(--line-strong);
+    padding: 8px 14px;
+    border-radius: 999px;
+    transition: color 0.15s ease, border-color 0.15s ease;
+  }
+  .nav__lang:hover {
+    color: var(--brand);
+    border-color: var(--brand);
+  }
+  .nav__cta {
+    padding: 10px 22px;
+  }
+  .nav__toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: 0;
+    cursor: pointer;
+    padding: 8px;
+  }
+  .nav__toggle span {
+    width: 22px;
+    height: 2px;
+    background: var(--ink);
+    border-radius: 2px;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+  }
+  .nav__drawer {
+    display: none;
+    border-top: 1px solid var(--line);
+    background: #fff;
+    padding: 16px 24px 24px;
+  }
+  .nav__drawer--open {
+    display: block;
+  }
+  .nav__drawer-links {
+    display: grid;
+    gap: 4px;
+  }
+  .nav__drawer-link {
+    padding: 12px 4px;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--ink);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav__drawer-link--active {
+    color: var(--brand);
+  }
+  .nav__drawer-links .btn {
+    margin-top: 16px;
+  }
+  @media (max-width: 900px) {
+    .nav__links {
+      display: none;
+    }
+    .nav__toggle {
+      display: flex;
+    }
+    .nav__cta {
+      display: none;
+    }
+  }
+</style>

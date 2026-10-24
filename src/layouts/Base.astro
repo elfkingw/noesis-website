@@ -1,0 +1,58 @@
+---
+import Nav from "@/components/Nav.astro";
+import Footer from "@/components/Footer.astro";
+import type { L } from "@/data/content";
+import { content } from "@/data/content";
+import "@/styles/global.css";
+
+interface Props {
+  lang: L;
+  pathname: string;
+  pageKey: "home" | "product" | "solutions" | "download" | "about" | "contact";
+  noIndex?: boolean;
+}
+
+const { lang, pathname, pageKey, noIndex = false } = Astro.props;
+const c = content[lang];
+const meta = c.meta[pageKey];
+const absBase = Astro.site ? new URL(Astro.site).origin : "https://noesis.example.com";
+const canonical = absBase + pathname;
+
+const toZh = (p: string): string =>
+  lang === "zh" ? p : p === "/en/" ? "/" : p.replace(/^\/en/, "") || "/";
+const toEn = (p: string): string =>
+  lang === "en" ? p : "/en" + (p === "/" ? "/" : p);
+---
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{meta.title}</title>
+    <meta name="description" content={meta.description} />
+    {noIndex && <meta name="robots" content="noindex" />}
+
+    <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang="zh-CN" href={absBase + toZh(pathname)} />
+    <link rel="alternate" hreflang="en" href={absBase + toEn(pathname)} />
+    <link rel="alternate" hreflang="x-default" href={absBase + toZh(pathname)} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={c.siteName} />
+    <meta property="og:title" content={meta.title} />
+    <meta property="og:description" content={meta.description} />
+    <meta property="og:url" content={canonical} />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={meta.title} />
+    <meta name="twitter:description" content={meta.description} />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </head>
+  <body>
+    <Nav lang={lang} pathname={pathname} />
+    <main>
+      <slot />
+    </main>
+    <Footer lang={lang} />
+  </body>
+</html>

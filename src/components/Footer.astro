@@ -1,0 +1,129 @@
+---
+import Icon from "./Icon.astro";
+import type { L } from "@/data/content";
+import { content } from "@/data/content";
+import { DOC_URL } from "@/data/content";
+
+interface Props {
+  lang: L;
+}
+
+const { lang } = Astro.props;
+const c = content[lang];
+const year = new Date().getFullYear();
+---
+<footer class="footer">
+  <div class="container">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <div class="footer__name">{lang === "zh" ? "新致新知 Noesis AI" : "Noesis AI"}</div>
+        <p class="footer__tagline">{c.footer.tagline}</p>
+      </div>
+      <div class="footer__cols">
+        {c.footer.columns.map((col) => (
+          <div class="footer__col">
+            <h4 class="footer__col-title">{col.title}</h4>
+            <ul>
+              {col.links.map((link) => (
+                <li>
+                  <a href={link.href === DOC_URL ? DOC_URL : link.href}>{link.label}</a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <p class="footer__legal">{c.footer.legal.replace("{year}", String(year))}</p>
+      <a
+        class="footer__doc"
+        href="https://my.feishu.cn/docx/H8b0dIjwLojYTBxlr1rcAvKynvh"
+      >
+        <Icon name="doc" size={15} />
+        {c.footer.docTitle}
+      </a>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background: var(--navy);
+    color: #c6d0e4;
+    margin-top: 0;
+  }
+  .footer__top {
+    display: flex;
+    gap: 48px;
+    justify-content: space-between;
+    padding: 64px 0 48px;
+    flex-wrap: wrap;
+  }
+  .footer__name {
+    font-size: 26px;
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: 0.02em;
+  }
+  .footer__tagline {
+    margin-top: 12px;
+    max-width: 300px;
+    color: #8ea0c2;
+    font-size: 15px;
+  }
+  .footer__cols {
+    display: flex;
+    gap: 72px;
+    flex-wrap: wrap;
+  }
+  .footer__col-title {
+    font-size: 14px;
+    color: #fff;
+    margin-bottom: 16px;
+  }
+  .footer__col ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 12px;
+  }
+  .footer__col a {
+    font-size: 14px;
+    color: #8ea0c2;
+    transition: color 0.15s ease;
+  }
+  .footer__col a:hover {
+    color: #fff;
+  }
+  .footer__bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+    padding: 22px 0 30px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  .footer__legal {
+    font-size: 13px;
+    color: #73849f;
+  }
+  .footer__doc {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: #8ea0c2;
+    transition: color 0.15s ease;
+  }
+  .footer__doc:hover {
+    color: #fff;
+  }
+  @media (max-width: 640px) {
+    .footer__cols {
+      gap: 36px;
+    }
+  }
+</style>
