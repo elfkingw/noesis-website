@@ -1,0 +1,288 @@
+---
+import Logo from "./Logo.astro";
+import type { L } from "@/data/content";
+import { content } from "@/data/content";
+import { withBase } from "@/lib/paths";
+
+interface Props {
+  lang: L;
+  pathname: string;
+}
+
+const { lang, pathname } = Astro.props;
+const c = content[lang];
+
+const isActive = (href: string): boolean => {
+  if (href === "/" || href === "/en/") {
+    return pathname === href;
+  }
+  return pathname.startsWith(href.replace(/\/$/, ""));
+};
+
+const switchHref = (): string => {
+  if (lang === "zh") {
+    return "/en" + (pathname === "/" ? "/" : pathname);
+  }
+  return pathname.replace(/^\/en/, "") || "/";
+};
+---
+<header class="nav">
+  <div class="container nav__inner">
+    <Logo lang={lang} />
+
+    <nav class="nav__links" aria-label="Primary">
+      {c.nav.links.map((link) => (
+        <a
+          href={withBase(link.href)}
+          class:list={["nav__link", { "nav__link--active": isActive(link.href) }]}
+        >
+          {link.label}
+        </a>
+      ))}
+    </nav>
+
+    <div class="nav__actions">
+      <a
+        class="nav__lang"
+        href={withBase(switchHref())}
+        title={c.nav.switchTo}
+      >
+        {c.nav.switchTo}
+      </a>
+      <a href={withBase(lang === "zh" ? "/contact/" : "/en/contact/")} class="btn btn--primary nav__cta">
+        {c.nav.cta}
+      </a>
+      <button
+        class="nav__toggle"
+        type="button"
+        aria-label={lang === "zh" ? "打开菜单" : "Open menu"}
+        aria-expanded="false"
+        aria-controls="site-drawer"
+        data-nav-toggle
+        data-label-open={lang === "zh" ? "打开菜单" : "Open menu"}
+        data-label-close={lang === "zh" ? "关闭菜单" : "Close menu"}
+      >
+        <span class="nav__bars" aria-hidden="true">
+          <span></span><span></span><span></span>
+        </span>
+      </button>
+    </div>
+  </div>
+
+  <button class="nav__backdrop" type="button" data-nav-backdrop hidden aria-label={lang === "zh" ? "关闭菜单" : "Close menu"}></button>
+
+  <div class="nav__drawer" id="site-drawer" data-nav-drawer hidden>
+    <nav class="nav__drawer-links" aria-label="Mobile">
+      {c.nav.links.map((link) => (
+        <a href={withBase(link.href)} class:list={["nav__drawer-link", { "nav__drawer-link--active": isActive(link.href) }]}>
+          {link.label}
+        </a>
+      ))}
+      <a href={withBase(lang === "zh" ? "/contact/" : "/en/contact/")} class="btn btn--primary">
+        {c.nav.cta}
+      </a>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const toggle = document.querySelector<HTMLButtonElement>("[data-nav-toggle]");
+  const drawer = document.querySelector<HTMLElement>("[data-nav-drawer]");
+  const backdrop = document.querySelector<HTMLButtonElement>("[data-nav-backdrop]");
+  const root = document.documentElement;
+
+  const setOpen = (open: boolean) => {
+    if (!toggle || !drawer || !backdrop) return;
+    drawer.hidden = !open;
+    backdrop.hidden = !open;
+    toggle.setAttribute("aria-expanded", String(open));
+    toggle.setAttribute("aria-label", open ? toggle.dataset.labelClose || "" : toggle.dataset.labelOpen || "");
+    root.classList.toggle("nav-open", open);
+  };
+
+  if (toggle && drawer && backdrop) {
+    toggle.addEventListener("click", () => setOpen(drawer.hidden));
+    backdrop.addEventListener("click", () => setOpen(false));
+    drawer.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => setOpen(false)));
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && !drawer.hidden) {
+        setOpen(false);
+        toggle.focus();
+      }
+    });
+    window.matchMedia("(min-width: 901px)").addEventListener("change", (event) => {
+      if (event.matches) setOpen(false);
+    });
+  }
+</script>
+
+<style>
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 60;
+    background: rgba(255, 255, 255, 0.94);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--line);
+    padding-top: env(safe-area-inset-top, 0px);
+  }
+  .nav__inner {
+    position: relative;
+    z-index: 2;
+    height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .nav__links {
+    display: flex;
+    gap: 6px;
+  }
+  .nav__link {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--ink-soft);
+    padding: 8px 14px;
+    border-radius: 999px;
+    transition: color 0.15s ease, background 0.15s ease;
+  }
+  .nav__link:hover {
+    color: var(--ink);
+    background: var(--bg-soft);
+  }
+  .nav__link--active {
+    color: var(--brand);
+    background: rgba(31, 79, 216, 0.08);
+    font-weight: 600;
+  }
+  .nav__actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .nav__lang {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 40px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink-soft);
+    border: 1px solid var(--line-strong);
+    padding: 8px 14px;
+    border-radius: 999px;
+    transition: color 0.15s ease, border-color 0.15s ease;
+  }
+  .nav__lang:hover {
+    color: var(--brand);
+    border-color: var(--brand);
+  }
+  .nav__cta {
+    padding: 10px 22px;
+  }
+  .nav__toggle {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    flex: 0 0 auto;
+    background: var(--bg-soft);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    cursor: pointer;
+    padding: 0;
+  }
+  .nav__bars {
+    display: grid;
+    gap: 5px;
+    width: 18px;
+  }
+  .nav__bars span {
+    display: block;
+    height: 2px;
+    width: 100%;
+    background: var(--ink);
+    border-radius: 2px;
+    transform-origin: center;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+  }
+  .nav__toggle[aria-expanded="true"] .nav__bars span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+  .nav__toggle[aria-expanded="true"] .nav__bars span:nth-child(2) {
+    opacity: 0;
+  }
+  .nav__toggle[aria-expanded="true"] .nav__bars span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+  .nav__backdrop {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100dvh;
+    border: 0;
+    padding: 0;
+    background: rgba(11, 23, 48, 0.45);
+    cursor: pointer;
+  }
+  .nav__backdrop[hidden] {
+    display: none;
+  }
+  .nav__drawer {
+    position: absolute;
+    z-index: 2;
+    top: 100%;
+    left: 0;
+    right: 0;
+    max-height: calc(100dvh - 72px - env(safe-area-inset-top, 0px));
+    overflow-y: auto;
+    border-top: 1px solid var(--line);
+    background: #fff;
+    padding: 8px 16px calc(16px + env(safe-area-inset-bottom, 0px));
+    box-shadow: 0 18px 40px rgba(11, 21, 38, 0.12);
+  }
+  .nav__drawer[hidden] {
+    display: none;
+  }
+  .nav__drawer-links {
+    display: grid;
+    gap: 4px;
+  }
+  .nav__drawer-link {
+    display: flex;
+    align-items: center;
+    min-height: 48px;
+    padding: 10px 8px;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--ink);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav__drawer-link--active {
+    color: var(--brand);
+  }
+  .nav__drawer-links .btn {
+    margin-top: 16px;
+    min-height: 48px;
+  }
+  @media (max-width: 900px) {
+    .nav__links {
+      display: none;
+    }
+    .nav__toggle {
+      display: inline-flex;
+    }
+    .nav__cta {
+      display: none;
+    }
+    .nav__lang {
+      min-height: 44px;
+      padding: 8px 12px;
+    }
+  }
+</style>

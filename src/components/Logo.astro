@@ -1,0 +1,75 @@
+---
+import type { L } from "@/data/content";
+import { withBase } from "@/lib/paths";
+
+interface Props {
+  lang: L;
+  light?: boolean;
+}
+
+const { lang, light = false } = Astro.props;
+const name = lang === "zh" ? "新致新知 Noesis AI" : "Noesis AI";
+const sub = lang === "zh" ? "企业级智能体平台" : "Enterprise Agent Platform";
+---
+<a href={withBase(lang === "zh" ? "/" : "/en/")} class="logo" aria-label={name}>
+  <img src={withBase("/logo.svg")} alt="" class="logo__mark" width="40" height="40" />
+  <span class="logo__text" aria-hidden="true">
+    <span class="logo__name">{name}</span>
+    <span class="logo__sub">{sub}</span>
+  </span>
+</a>
+
+<style>
+  .logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .logo__mark {
+    width: 40px;
+    height: 40px;
+    flex: 0 0 auto;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+  .logo__text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+    min-width: 0;
+  }
+  .logo__name {
+    font-size: 16px;
+    font-weight: 800;
+    letter-spacing: 0.01em;
+    color: var(--ink);
+    white-space: nowrap;
+  }
+  .logo__sub {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--ink-faint);
+    letter-spacing: 0.06em;
+  }
+  .logo--light .logo__name {
+    color: #fff;
+  }
+  .logo--light .logo__sub {
+    color: rgba(255, 255, 255, 0.6);
+  }
+  @media (max-width: 640px) {
+    .logo {
+      gap: 8px;
+    }
+    .logo__mark {
+      width: 34px;
+      height: 34px;
+    }
+    .logo__name {
+      font-size: 14px;
+    }
+    .logo__sub {
+      display: none;
+    }
+  }
+</style>

@@ -1,0 +1,263 @@
+---
+import Base from "@/layouts/Base.astro";
+import Icon from "@/components/Icon.astro";
+import type { L } from "@/data/content";
+import { withBase } from "@/lib/paths";
+import { content } from "@/data/content";
+
+interface Props {
+  lang: L;
+  pathname: string;
+}
+
+const { lang, pathname } = Astro.props;
+const c = content[lang];
+const zh = lang === "zh";
+const ct = c.contact;
+const SALES_EMAIL = "sales@noesis.example.com";
+---
+<Base lang={lang} pathname={pathname} pageKey="contact">
+  <section class="page-hero">
+    <div class="container page-hero__inner">
+      <span class="eyebrow">{ct.hero.eyebrow}</span>
+      <h1 class="page-hero__title">{ct.hero.title}</h1>
+      <p class="page-hero__sub">{ct.hero.sub}</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container grid grid--2-stack">
+      <div class="reveal">
+        <div class="card form-card">
+          <h2 class="form-card__title">{ct.form.title}</h2>
+          <p class="form-card__sub">{ct.form.sub}</p>
+
+          <form class="form" data-lead-form data-email={SALES_EMAIL}>
+            <div class="form__row">
+              <div class="form__field">
+                <label class="form__label" for="name">{ct.form.name} <span class="req">*</span></label>
+                <input class="form__input" id="name" name="name" type="text" required placeholder={ct.form.namePh} autocomplete="name" />
+              </div>
+              <div class="form__field">
+                <label class="form__label" for="company">{ct.form.company}</label>
+                <input class="form__input" id="company" name="company" type="text" placeholder={ct.form.companyPh} autocomplete="organization" />
+              </div>
+            </div>
+            <div class="form__row">
+              <div class="form__field">
+                <label class="form__label" for="role">{ct.form.role}</label>
+                <input class="form__input" id="role" name="role" type="text" placeholder={ct.form.rolePh} />
+              </div>
+              <div class="form__field">
+                <label class="form__label" for="contact">{ct.form.phone} <span class="req">*</span></label>
+                <input class="form__input" id="contact" name="contact" type="text" required placeholder={ct.form.phonePh} />
+              </div>
+            </div>
+            <div class="form__field">
+              <label class="form__label" for="message">{ct.form.message}</label>
+              <textarea class="form__textarea" id="message" name="message" placeholder={ct.form.messagePh}></textarea>
+            </div>
+
+            <div class="form-card__error" data-form-error role="alert" hidden></div>
+
+            <button type="submit" class="btn btn--primary btn--block btn--lg" data-form-submit>
+              {ct.form.submit}
+            </button>
+            <p class="form__hint">{ct.form.privacy}</p>
+          </form>
+
+          <div class="form-card__ok" data-form-ok hidden>
+            <div class="form-card__ok-icon"><Icon name="check" size={30} /></div>
+            <h3 class="form-card__title">{ct.form.okTitle}</h3>
+            <p class="form-card__sub">{ct.form.okText}</p>
+            <button type="button" class="btn btn--ghost" data-form-again>{ct.form.again}</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="reveal">
+        <span class="eyebrow">{ct.alt.title}</span>
+        <div class="contact__alt">
+          {ct.alt.items.map((item) => (
+            <a class="contact__alt-item" href={item.href?.startsWith("http") ? item.href : withBase(item.href || "#")}>
+              <div class="card__icon"><Icon name={item.icon} size={26} /></div>
+              <div>
+                <h3 class="card__title">{item.title}</h3>
+                <p class="card__text">{item.text}</p>
+                <span class="contact__alt-cta">
+                  {item.cta}
+                  <span class="btn__arrow">→</span>
+                </span>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>("[data-lead-form]");
+  if (form) {
+    const email = form.dataset.email || "";
+    const submitBtn = form.querySelector<HTMLButtonElement>("[data-form-submit]");
+    const error = form.querySelector<HTMLElement>("[data-form-error]");
+    const ok = form.querySelector<HTMLElement>("[data-form-ok]");
+    const again = form.querySelector<HTMLButtonElement>("[data-form-again]");
+    const errorMsg = error?.dataset.errorMsg || "Please fill in required fields.";
+
+    const get = (id: string) => (form.querySelector<HTMLInputElement | HTMLTextAreaElement>(`#${id}`)?.value || "").trim();
+
+    const show = (el: HTMLElement, on: boolean) => {
+      if (on) el.removeAttribute("hidden");
+      else el.setAttribute("hidden", "");
+    };
+
+    form.querySelectorAll("input").forEach((i) =>
+      i.addEventListener("input", () => {
+        if (error && !error.hasAttribute("hidden")) show(error, false);
+      })
+    );
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const name = get("name");
+      const contact = get("contact");
+      if (!name || !contact) {
+        if (error && errorMsg) {
+          error.textContent = errorMsg;
+          show(error, true);
+        }
+        return;
+      }
+      const company = get("company");
+      const role = get("role");
+      const message = get("message");
+      const subject = `[Noesis Demo] ${name}${company ? " / " + company : ""}`;
+      const body = [
+        `Name: ${name}`,
+        `Company: ${company}`,
+        `Title: ${role}`,
+        `Contact: ${contact}`,
+        ``,
+        `Scenario:`,
+        message || "-",
+      ].join("\n");
+      if (submitBtn) {
+        const original = submitBtn.textContent;
+        submitBtn.disabled = true;
+        submitBtn.textContent = submitBtn.dataset.submitting || "…";
+        window.location.href = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        setTimeout(() => {
+          submitBtn.disabled = false;
+          submitBtn.textContent = original;
+          if (ok) show(ok, true);
+          if (form) show(form, false);
+        }, 600);
+      }
+    });
+
+    again?.addEventListener("click", () => {
+      if (form && ok) {
+        show(form, true);
+        show(ok, false);
+        form.reset();
+      }
+    });
+  }
+</script>
+
+<style>
+  .grid--2-stack {
+    display: grid;
+    grid-template-columns: 1.3fr 0.7fr;
+    gap: 40px;
+    align-items: start;
+  }
+  @media (max-width: 900px) {
+    .grid--2-stack {
+      grid-template-columns: 1fr;
+    }
+  }
+  .form-card {
+    padding: 36px;
+  }
+  @media (max-width: 640px) {
+    .form-card {
+      padding: 22px 16px;
+    }
+    .contact__alt-item {
+      padding: 16px;
+      gap: 12px;
+    }
+  }
+  .form-card__title {
+    font-size: 22px;
+    margin-bottom: 6px;
+  }
+  .form-card__sub {
+    color: var(--ink-soft);
+    font-size: 15px;
+    margin-bottom: 24px;
+  }
+  .form-card__error {
+    background: rgba(232, 72, 47, 0.1);
+    color: var(--accent);
+    border: 1px solid rgba(232, 72, 47, 0.3);
+    border-radius: var(--radius-sm);
+    padding: 12px 14px;
+    font-size: 14px;
+  }
+  .form-card__ok {
+    text-align: center;
+    padding: 30px 10px;
+  }
+  .form-card__ok-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: rgba(18, 128, 92, 0.12);
+    color: #12805c;
+    display: grid;
+    place-items: center;
+    margin: 0 auto 20px;
+  }
+  .form-card__ok .form-card__title {
+    margin-bottom: 12px;
+  }
+  .form-card__ok .btn {
+    margin-top: 20px;
+  }
+  .contact__alt {
+    display: grid;
+    gap: 18px;
+  }
+  .contact__alt-item {
+    display: flex;
+    gap: 18px;
+    padding: 24px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: #fff;
+    transition: border-color 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease;
+  }
+  .contact__alt-item:hover {
+    border-color: var(--line-strong);
+    box-shadow: var(--shadow);
+    transform: translateY(-2px);
+  }
+  .contact__alt-item .card__title {
+    font-size: 17px;
+    margin-bottom: 6px;
+  }
+  .contact__alt-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 12px;
+    font-weight: 600;
+    color: var(--brand);
+    font-size: 14px;
+  }
+</style>
